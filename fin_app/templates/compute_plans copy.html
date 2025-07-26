@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">    
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Financial Services - Compute Plans</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+
+    h2 {
+      color: blue;
+      text-decoration: underline;
+    }
+
+    .charts-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+    .chart-container {
+      width: 100%;
+      max-width: 500px;
+      min-width: 300px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      padding: 16px 8px 24px 8px;
+      box-sizing: border-box;
+      margin: 0;
+    }
+    #returnsChart, #sbiReturnsChart {
+      width: 100% !important;
+      height: 320px !important;
+      aspect-ratio: 2/1;
+      background: #fff;
+      border-radius: 12px;
+    }
+    @media (max-width: 1100px) {
+      .charts-row {
+        flex-direction: column;
+        align-items: center;
+      }
+      .chart-container {
+        max-width: 100%;
+      }
+    }
+    .top-right-link {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  z-index: 10;
+}
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <h1 style="text-align:center; margin-bottom: 10px;">Returns for Investment of ₹{{ savings }}</h1>
+  <div class="charts-row">
+    <div class="chart-container">
+      <h2 style="text-align:center; margin-bottom: 10px;">Deutsche Bank:</h2>
+      <canvas id="returnsChart"></canvas>
+    </div>
+    <div class="chart-container">
+      <h2 style="text-align:center; margin-bottom: 10px;">State Bank of India:</h2>
+      <canvas id="sbiReturnsChart"></canvas>
+    </div>
+  </div>
+  <script>
+    const savings = Number("{{ savings|default:0 }}");
+    // Deutsche Bank
+    const returns = [
+      { label: '1 Year (5%)', amount: savings * Math.pow(1 + 0.05, 1) },
+      { label: '3 Years (6.25%)', amount: savings * Math.pow(1 + 0.0625, 3) },
+      { label: '5 Years (6.25%)', amount: savings * Math.pow(1 + 0.0625, 5) },
+    ];
+    const labels = returns.map(r => r.label);
+    const data = returns.map(r => r.amount.toFixed(2));
+    const ctx = document.getElementById('returnsChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Returns (₹)',
+          data: data,
+          backgroundColor: [
+            'rgba(54, 162, 235, 0.7)',
+            'rgba(255, 206, 86, 0.7)',
+            'rgba(75, 192, 192, 0.7)'
+          ],
+          borderColor: [
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          title: {
+            display: false // Title is shown above the chart in HTML
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+    // State Bank of India
+    const sbiReturns = [
+      { label: '1 Year (6.25%)', amount: savings * Math.pow(1 + 0.0625, 1) },
+      { label: '3 Years (6.30%)', amount: savings * Math.pow(1 + 0.063, 3) },
+      { label: '5 Years (6.30%)', amount: savings * Math.pow(1 + 0.063, 5) },
+    ];
+    const sbiLabels = sbiReturns.map(r => r.label);
+    const sbiData = sbiReturns.map(r => r.amount.toFixed(2));
+    const sbiCtx = document.getElementById('sbiReturnsChart').getContext('2d');
+    new Chart(sbiCtx, {
+      type: 'bar',
+      data: {
+        labels: sbiLabels,
+        datasets: [{
+          label: 'Returns (₹)',
+          data: sbiData,
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.7)',
+            'rgba(255, 159, 64, 0.7)',
+            'rgba(153, 102, 255, 0.7)'
+          ],
+          borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(255, 159, 64, 1)',
+            'rgba(153, 102, 255, 1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          title: {
+            display: false // Title is shown above the chart in HTML
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+  <div class="top-right-link">
+    <a href="/home/" class="button-class">Go to Home Page</a>
+  </br>
+    <a href="/home/getinfo/" class="button-class">Go to Investment Schemes Page</a>
+  </div>
+</body>
+</html>

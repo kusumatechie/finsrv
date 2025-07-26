@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load i18n %}
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Financial Inclusion</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background-size: cover;
+            background-position: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .login-container {
+            background: rgba(255, 255, 255, 0.92);
+            max-width: 350px;
+            margin: 80px auto;
+            padding: 32px 28px 24px 28px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+            text-align: center;
+        }
+        .login-container h2 {
+            margin-bottom: 18px;
+            color: #1a237e;
+        }
+        .login-container label {
+            display: block;
+            margin: 12px 0 6px 0;
+            color: #333;
+            font-weight: 500;
+        }
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: 100%;
+            padding: 10px 8px;
+            margin-bottom: 16px;
+            border: 1px solid #bdbdbd;
+            border-radius: 6px;
+            font-size: 1em;
+        }
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            background: #1976d2;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .login-container button:hover {
+            background: #1565c0;
+        }
+        .messages {
+            margin-bottom: 12px;
+            color: #d32f2f;
+        }
+        .image-row {
+      display: flex;
+      align-items: center;
+      gap: 20px; /* space between images */
+    }
+    .image-container {
+      text-align: center;
+    }
+    .video-background {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+        z-index: -1;
+    }
+    .center-login {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh; /* or 100vh for full page */
+      min-width: 100vw;
+    }
+    </style>
+</head>
+<body>
+    {% load static %}  
+    <video class="video-background" autoplay loop muted>
+      <source src="{% static 'stacking_coins.mp4' %}" type="video/mp4">
+    </video>
+     
+    <div class="center-login">
+    <div class="login-container">
+        <h2>{% trans "Welcome to Pocket Plan" %}</h2>
+        <form action="{% url 'set_language' %}" method="post" style="margin-bottom: 18px;">
+            {% csrf_token %}
+            <label for="language">{% trans "Choose your preferred Language" %}:</label>
+            <select name="language" id="language" onchange="this.form.submit()">
+                <option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>English</option>
+                <option value="hi" {% if LANGUAGE_CODE == 'hi' %}selected{% endif %}>हिन्दी</option>
+                <option value="kn" {% if LANGUAGE_CODE == 'kn' %}selected{% endif %}>ಕನ್ನಡ</option>
+                <option value="mr" {% if LANGUAGE_CODE == 'mr' %}selected{% endif %}>मराठी</option>
+                <option value="bn" {% if LANGUAGE_CODE == 'bn' %}selected{% endif %}>বাংলা</option>
+            </select>
+            <input type="hidden" name="next" value="{{ request.path }}">
+        </form>
+        
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div>{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <form method="post">
+            {% csrf_token %}
+            
+            <button type="submit">{% trans "Click Here" %}</button>
+            <!--<a href=getinfo class="button-class"
+               style="text-decoration:none; color:white; background-color:blue; font-size:20px; padding:10px 20px; border:none; border-radius:5px;">{% trans "Login" %}</a>-->
+        </form>
+    </div>
+    </div>
+</body>
+</html>

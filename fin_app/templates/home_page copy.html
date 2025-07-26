@@ -1,0 +1,73 @@
+{% load i18n %}
+<html>
+<h1>"Welcome to the Home Page"</h1>
+<p>"This is your financial service platform."</p>
+<head>
+  <meta charset="UTF-8">
+  <title>Deposit Types</title>
+  <style>
+    .image-row {
+      display: flex;
+      align-items: center;
+      gap: 20px; /* space between images */
+    }
+    .image-container {
+      text-align: center;
+    }
+    .image-container h3 {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  {% load static %}
+  <div class="image-row">
+    <div class="image-container">
+  <video width="100%" height="250" autoplay loop muted>
+    <!--<source src="https://media.istockphoto.com/id/2148355956/video/return-on-investment-strategy-concept-animation-with-business-man-investment-money-for-high.mp4?s=mp4-640x640-is&k=20&c=EOX9rHlUHmxWmR56Hb81-pd-RFGFyuxXQFT_Ix4z9Dc=" type="video/mp4">-->
+    <source src="{% static 'finsrv_vedio.mp4' %}" type="video/mp4">
+  </video>
+  </div>
+  <div class="image-container">
+    <h3><i>"Meet your Financial Advisors to better plan your future"<br>"We reach to your door step to help you guide"</i></h3>
+  </div>  
+  </div>
+  <h2 style="color:blue"><u>"Government Schemes"</u></h2>
+  <h3><i>"Government saving schemes are financial products or plans launched and backed by the government to encourage individuals—especially small savers—to invest and save money safely, often with attractive interest rates and tax benefits."
+  </br>"Here are the list of Government Saving Plans"</i></h3>
+  <div class="image-row">
+    <div class="image-container">
+      <img src="https://www.thefinfact.com/wp-content/uploads/2020/10/ppf-account.png" width="150" height="150" />
+      <h3>"Public Provident Fund (PPF)"</h3>
+    </div>
+    <div class="image-container">
+      <img src="https://www.shutterstock.com/image-illustration/national-pension-scheme-known-nps-260nw-2171932039.jpg" width="150" height="150" />
+      <h3>"National Pension Scheme (NPS)"</h3>
+    </div>
+    <div class="image-container">
+      <img src="https://zfunds-public.s3.ap-south-1.amazonaws.com/articlesImage/1588949921129" width="150" height="150" />
+      <h3>"Senior Citizen Savings Scheme (SCSS)"</h3>
+    </div>
+    <div class="image-container">
+      <img src="https://www.sscadda.com/wp-content/uploads/multisite/sites/2/2022/08/16191127/Sukanya-Samriddhi-Yojana-01-1.png" width="150" height="150" />
+      <h3>"Sukanya Samriddhi Yojana"</h3>
+    </div>
+  </div>
+  <h2 style="color:blue"><u>"Private Investments"</u></h2>
+  <h3><i>"Private Investment Plans are strategic allocations of capital by individuals, corporations, or private institutions into various assets or ventures with the goal of generating financial returns over time."
+  </br>"Here are the list of Private Investment Plans"</i></h3>
+  <div class="image-row">
+    <div class="image-container">
+      <img src="https://www.financialexpress.com/wp-content/uploads/2021/09/FIXED-DEPOSIT1.jpg" width="150" height="150" />
+      <h3>"Fixed Deposit"</h3>
+    </div>
+    <div class="image-container">
+      <img src="https://vibrantfinserv.com/kb/wp-content/uploads/2024/02/rd.jpg" width="150" height="150" />
+      <h3>"Recurring Deposit"</h3>
+    </div>
+  </div>
+  <br /><br /><br />
+<a href=getinfo class="button-class"
+    style="text-decoration:none; color:white; background-color:blue; font-size:20px; padding:10px 20px; border:none; border-radius:5px;">"Know More"</a>
+</body>
+</html>
